@@ -1,0 +1,31 @@
+{
+  "name": "marketing-cloud-soap",
+  "version": "0.1.0",
+  "description": "Salesforce Marketing Cloud (Fuel) SOAP Client",
+  "main": "src/index.js",
+  "author": "Jacob Bare <jacob@limit0.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limit-zero/marketing-cloud-soap.git"
+  },
+  "directories": {
+    "lib": "./src"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint src"
+  },
+  "engines": {
+    "node": ">=8.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "marketing-cloud-auth": "^1.0.2",
+    "pretty": "^2.0.0",
+    "soap": "^0.25.0"
+  }
+}
