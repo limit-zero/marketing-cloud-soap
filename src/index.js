@@ -11,7 +11,7 @@ class MarkingCloudSOAP {
    * @param {string} options.auth.clientId The Marketing Cloud API ID
    * @param {string} options.auth.clientSecret The Marketing Cloud API Scecret
    * @param {string} options.auth.authUrl The Marketing Cloud auth URL (optional)
-   * @param {string} options.soapOptions Additional options to send to the SOAP client.
+   * @param {object} options.soapOptions Additional options to send to the SOAP client.
    *                                     See https://github.com/vpulim/node-soap#options for more info.
    */
   constructor({
