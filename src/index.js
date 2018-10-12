@@ -3,7 +3,7 @@ const MarketingCloudAuth = require('marketing-cloud-auth');
 const applyAuthHeader = require('./utils/apply-auth-header');
 const ResponseError = require('./objects/response-error');
 
-class MarkingCloudSOAP {
+class MarketingCloudSOAP {
   /**
    * For WSDL information visit: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/wsdl-endpoint-links.htm
    *
@@ -39,7 +39,7 @@ class MarkingCloudSOAP {
         Properties: props,
       },
     });
-    return this.handleResponse({ result, rawResponse, rawRequest });
+    return MarketingCloudSOAP.handleResponse({ result, rawResponse, rawRequest });
   }
 
   /**
@@ -77,16 +77,17 @@ class MarkingCloudSOAP {
    * @private
    * @param {object} params
    */
-  handleResponse({ result, rawResponse, rawRequest } = {}) {
-    if (result && result.OverallStatus && result.OverallStatus !== 'OK') {
-      throw new ResponseError({
-        result,
-        rawResponse,
-        rawRequest
-      }, result.OverallStatus);
+  static handleResponse({ result, rawResponse, rawRequest } = {}) {
+    if (!result && !result.OverallStatus) {
+      throw new ResponseError({ result, rawResponse, rawRequest }, 'Unable to parse response status.');
+    }
+
+    const { OverallStatus } = result;
+    if (ResponseError.pattern.test(OverallStatus)) {
+      throw new ResponseError({ result, rawResponse, rawRequest }, OverallStatus);
     }
     return result;
   }
 }
 
-module.exports = MarkingCloudSOAP;
+module.exports = MarketingCloudSOAP;

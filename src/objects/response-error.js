@@ -1,6 +1,15 @@
 class ResponseError extends Error {
+  /**
+   *
+   * @param {object} params
+   * @param {object} params.result
+   * @param {string} params.rawResponse
+   * @param {string} params.rawRequest
+   * @param {string} message
+   * @param  {...any} args
+   */
   constructor({ result, rawResponse, rawRequest } = {}, message, ...args) {
-    const formatted = message ? message.replace(/^error: /i, '') : message;
+    const formatted = message ? message.replace(ResponseError.pattern, '') : message;
     super(formatted, ...args);
 
     if (Error.captureStackTrace) {
@@ -12,5 +21,7 @@ class ResponseError extends Error {
     this.rawRequest = rawRequest;
   }
 }
+
+ResponseError.pattern = /^error: /i;
 
 module.exports = ResponseError;
