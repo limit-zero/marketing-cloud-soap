@@ -1,6 +1,7 @@
 const soap = require('soap');
 const MarketingCloudAuth = require('marketing-cloud-auth');
 const applyAuthHeader = require('./utils/apply-auth-header');
+const ResponseError = require('./objects/response-error');
 
 class MarkingCloudSOAP {
   /**
@@ -30,15 +31,15 @@ class MarkingCloudSOAP {
    * @param {string} type
    * @param {string[]} [props]
    */
-  async retrieve(type, props) {
+  async retrieve(type, props = ['CustomerKey']) {
     const client = await this.client();
-    const [result] = await client.RetrieveAsync({
+    const [result, rawResponse, rawRequest] = await client.RetrieveAsync({
       RetrieveRequest: {
         ObjectType: type,
         Properties: props,
       },
     });
-    return result;
+    return this.handleResponse({ result, rawResponse, rawRequest });
   }
 
   /**
@@ -70,6 +71,21 @@ class MarkingCloudSOAP {
       this.clientPromise = undefined;
       throw e;
     }
+  }
+
+  /**
+   * @private
+   * @param {object} params
+   */
+  handleResponse({ result, rawResponse, rawRequest } = {}) {
+    if (result && result.OverallStatus && result.OverallStatus !== 'OK') {
+      throw new ResponseError({
+        result,
+        rawResponse,
+        rawRequest
+      }, result.OverallStatus);
+    }
+    return result;
   }
 }
 
