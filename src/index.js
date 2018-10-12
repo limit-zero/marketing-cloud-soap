@@ -1,5 +1,6 @@
 const soap = require('soap');
 const MarketingCloudAuth = require('marketing-cloud-auth');
+const applyAuthHeader = require('./utils/apply-auth-header');
 
 class MarkingCloudSOAP {
   /**
@@ -35,7 +36,11 @@ class MarkingCloudSOAP {
       this.clientPromise = soap.createClientAsync(this.wsdl, this.soapOptions);
     }
     try {
-      const client = await this.clientPromise;
+      const [token, client] = await Promise.all([
+        this.auth.retrieve(),
+        this.clientPromise,
+      ]);
+      applyAuthHeader(client, `<fueloauth>${token.value}</fueloauth>`);
       return client;
     } catch (e) {
       this.clientPromise = undefined;
