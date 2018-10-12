@@ -26,7 +26,21 @@ class MarkingCloudSOAP {
   }
 
   /**
-   * Inits the SOAP client using the configured WSDL URL.
+   *
+   * @param {string} type
+   * @param {string[]} [props]
+   */
+  async retrieve(type, props) {
+    const client = await this.client();
+    const [result] = await client.RetrieveAsync({
+      RetrieveRequest: {
+        ObjectType: type,
+        Properties: props,
+      },
+    });
+    return result;
+  }
+
   /**
    * Describes the available SOAP web services.
    */
