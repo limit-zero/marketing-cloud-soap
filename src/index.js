@@ -27,11 +27,13 @@ class MarkingCloudSOAP {
 
   /**
    * Inits the SOAP client using the configured WSDL URL.
+  /**
+   * Inits and returns the SOAP client using the configured WSDL URL.
    *
    * @private
    * @return {Promise}
    */
-  async connect() {
+  async client() {
     if (!this.clientPromise) {
       this.clientPromise = soap.createClientAsync(this.wsdl, this.soapOptions);
     }
