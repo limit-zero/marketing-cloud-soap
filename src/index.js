@@ -2,6 +2,9 @@ const soap = require('soap');
 const MarketingCloudAuth = require('marketing-cloud-auth');
 const applyAuthHeader = require('./utils/apply-auth-header');
 const ResponseError = require('./objects/response-error');
+const defaultProps = require('./default-props');
+
+const { isArray } = Array;
 
 class MarketingCloudSOAP {
   /**
@@ -26,20 +29,62 @@ class MarketingCloudSOAP {
     this.soapOptions = soapOptions;
   }
 
+  retrieveByCustomerKey(type, key, props) {
+    const filter = {
+      attributes: { 'xsi:type': 'SimpleFilterPart' },
+      Property: 'CustomerKey',
+      SimpleOperator: 'equals',
+      Value: key,
+    };
+    return this.retrieveOne(type, filter, props);
+  }
+
+  async retrieveOne(type, filter, props, options) {
+    const response = await this.retrieve(type, props, {
+      Filter: filter,
+      ...options,
+    });
+    const result = MarketingCloudSOAP.formatResponse(response, true);
+    return result;
+  }
+
   /**
    *
    * @param {string} type
    * @param {string[]} [props]
    */
-  async retrieve(type, props = ['CustomerKey']) {
+  async retrieve(type, props, options) {
     const client = await this.client();
-    const [result, rawResponse, rawRequest] = await client.RetrieveAsync({
+    const [result, rawResponse, soapHeader, rawRequest] = await client.RetrieveAsync({
       RetrieveRequest: {
         ObjectType: type,
-        Properties: props,
+        Properties: MarketingCloudSOAP.propsFor(type, props),
+        ...options,
       },
     });
-    return MarketingCloudSOAP.handleResponse({ result, rawResponse, rawRequest });
+    return MarketingCloudSOAP.handleResponse({
+      result,
+      rawResponse,
+      rawRequest,
+      soapHeader,
+    });
+  }
+
+  async create(type, payload, options) {
+    const client = await this.client();
+    const [result, rawResponse, soapHeader, rawRequest] = await client.CreateAsync({
+      Objects: [{
+        attributes: { 'xsi:type': type },
+        ...payload,
+      }],
+      Options: options || undefined,
+    });
+    return MarketingCloudSOAP.handleResponse({
+      result,
+      rawResponse,
+      rawRequest,
+      soapHeader,
+    });
   }
 
   /**
@@ -71,6 +116,27 @@ class MarketingCloudSOAP {
       this.clientPromise = undefined;
       throw e;
     }
+  }
+
+  /**
+   *
+   * @param {string} type
+   * @param {?array} props
+   */
+  static propsFor(type, props) {
+    if (isArray(props) && props.length) return props;
+    return defaultProps[type] || ['ObjectId'];
+  }
+
+  /**
+   *
+   * @param {object} res
+   * @param {boolean} [asOne=false]
+   */
+  static formatResponse(res, asOne = false) {
+    const results = (res && isArray(res.Results)) ? res.Results.slice() : [];
+    if (asOne) return results.shift() || null;
+    return results;
   }
 
   /**
