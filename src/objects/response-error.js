@@ -1,3 +1,5 @@
+const pretty = require('pretty');
+
 class ResponseError extends Error {
   /**
    *
@@ -15,10 +17,9 @@ class ResponseError extends Error {
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, ResponseError);
     }
-
     this.result = result;
-    this.rawResponse = rawResponse;
-    this.rawRequest = rawRequest;
+    this.rawResponse = pretty(rawResponse || '');
+    this.rawRequest = pretty(rawRequest || '');
   }
 }
 
