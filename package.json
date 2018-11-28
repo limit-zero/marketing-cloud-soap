@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
-    "marketing-cloud-auth": "^1.0.2",
+    "marketing-cloud-auth": "^1.0.3",
     "moment": "^2.22.2",
     "pretty": "^2.0.0",
     "soap": "^0.25.0"

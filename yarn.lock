@@ -1134,10 +1134,10 @@ lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-marketing-cloud-auth@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/marketing-cloud-auth/-/marketing-cloud-auth-1.0.2.tgz#cc8fcb5883afa1b0e82686333bd01294d5ad4332"
-  integrity sha512-CCzkF/LBq/PQ3lRUrSNL/VkFWgSjshiS5vG/pJB0RELjGWuIBlH+wHXRHqywiuz/7Jc0S/BbwWBdXlqy/2ckOQ==
+marketing-cloud-auth@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/marketing-cloud-auth/-/marketing-cloud-auth-1.0.3.tgz#07a6dd009b1119e27f8de91b3d8afc1d9588b816"
+  integrity sha512-wUuxxUX9f+RO41rOLrdKOu+JCzxinkPgbcI3ebJLngjH2QmkcjJEJVPxVk3K8w3WfKUkeAtY61T/qodAzMmULg==
   dependencies:
     node-fetch "^2.2.0"
 
