@@ -1,6 +1,6 @@
 {
   "name": "marketing-cloud-soap",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Salesforce Marketing Cloud (Fuel) SOAP Client",
   "main": "src/index.js",
   "author": "Jacob Bare <jacob@limit0.io>",
