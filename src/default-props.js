@@ -120,4 +120,15 @@ module.exports = {
     'ObjectID',
     'SendClassificationType',
   ],
+  Subscriber: [
+    'Client.ID',
+    'CreatedDate',
+    'EmailAddress',
+    'EmailTypePreference',
+    'ID',
+    'PartnerKey',
+    'Status',
+    'SubscriberKey',
+    'UnsubscribedDate',
+  ],
 };
