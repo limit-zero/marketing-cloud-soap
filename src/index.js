@@ -1,6 +1,7 @@
 const soap = require('soap');
 const MarketingCloudAuth = require('marketing-cloud-auth');
 const applyAuthHeader = require('./utils/apply-auth-header');
+const convertDates = require('./utils/convert-dates');
 const ResponseError = require('./objects/response-error');
 const defaultProps = require('./default-props');
 
@@ -152,7 +153,12 @@ class MarketingCloudSOAP {
     if (ResponseError.pattern.test(OverallStatus)) {
       throw new ResponseError({ result, rawResponse, rawRequest }, OverallStatus);
     }
-    return result;
+
+    const Results = (isArray(result.Results)) ? result.Results : [];
+    return {
+      ...result,
+      Results: Results.map(obj => convertDates(obj)),
+    };
   }
 }
 
