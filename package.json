@@ -26,6 +26,7 @@
   "dependencies": {
     "marketing-cloud-auth": "^1.0.3",
     "moment": "^2.22.2",
+    "moment-timezone": "^0.5.23",
     "pretty": "^2.0.0",
     "soap": "^0.25.0"
   }
