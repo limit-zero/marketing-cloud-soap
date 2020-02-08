@@ -1171,12 +1171,12 @@ lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-marketing-cloud-auth@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/marketing-cloud-auth/-/marketing-cloud-auth-1.0.3.tgz#07a6dd009b1119e27f8de91b3d8afc1d9588b816"
-  integrity sha512-wUuxxUX9f+RO41rOLrdKOu+JCzxinkPgbcI3ebJLngjH2QmkcjJEJVPxVk3K8w3WfKUkeAtY61T/qodAzMmULg==
+marketing-cloud-auth@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/marketing-cloud-auth/-/marketing-cloud-auth-1.1.0.tgz#0c119cad38eafc696914572de41ea0ac70c0bf7b"
+  integrity sha512-yh7GEM9DUH1Zr677ypds+7jJuhE9Uz/lsTWG/aVVvSkYLN24E2FeiwShKYbz161W6rCtyF+yTjoiEz4/3cvhyw==
   dependencies:
-    node-fetch "^2.2.0"
+    node-fetch "^2.6.0"
 
 mime-db@~1.36.0:
   version "1.36.0"
@@ -1261,10 +1261,10 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-node-fetch@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.2.0.tgz#4ee79bde909262f9775f731e3656d0db55ced5b5"
-  integrity sha512-OayFWziIxiHY8bCUyLX6sTpDH8Jsbp4FfYd1j1f7vZyfgkcOnAyM4oQR16f8a0s7Gl/viMGRey8eScYk4V4EZA==
+node-fetch@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 nopt@~4.0.1:
   version "4.0.1"

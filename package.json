@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.18.2"
   },
   "dependencies": {
-    "marketing-cloud-auth": "^1.0.3",
+    "marketing-cloud-auth": "^1.1.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "pretty": "^2.0.0",
